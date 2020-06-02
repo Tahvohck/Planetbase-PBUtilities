@@ -57,11 +57,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="UtilStub.cs" />
     <None Include="Properties\Info.json">
       <DependentUpon>Info.tt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TahvUtil.cs" />
   </ItemGroup>
