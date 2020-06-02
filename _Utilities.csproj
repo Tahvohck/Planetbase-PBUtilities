@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tahvohck_Mods</RootNamespace>
-    <AssemblyName>_Utilities</AssemblyName>
+    <AssemblyName>PBUtilities</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -70,4 +70,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -noprofile "&amp; '$(SolutionDir)PackFiles.ps1' -OutputDir '$(TargetDir)' -TargetFileName '$(TargetName)' -SolutionDir '$(SolutionDir)' -Project '$(ProjectName)' -BuildConfig '$(ConfigurationName)'"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
