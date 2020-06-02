@@ -57,12 +57,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\Info.json">
+      <DependentUpon>Info.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </None>
     <None Include="TahvUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyVersions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyVersions.cs</LastGenOutput>
+    </Content>
+    <Content Include="Properties\Info.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Info.json</LastGenOutput>
     </Content>
     <None Include="Properties\version.t4" />
   </ItemGroup>
