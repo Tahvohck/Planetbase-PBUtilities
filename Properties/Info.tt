@@ -2,9 +2,10 @@
 <#@ include file="version.t4" #>
 <#@ output extension=".json" #>
 {
+    "ID":           "PBUtilities",
     "Author":       "Tahvohck",
     "Version":      "<#= this.version #>.<#= this.buildID #>",
-    "EntryPoint":   "Tahvohck_Mods.JPFariasUpdates.AutoConnections.Init",
-    "DisplayName":  "Automatically Create Connections",
-    "Requirements": [ "PBUtilities" ]
+
+    "EntryPoint":   "Tahvohck_Mods.UtilStub.Init",
+    "DisplayName":  "Utility Methods for Modders"
 }
