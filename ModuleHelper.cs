@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Tahvohck_Mods
 {
+    using Module = Planetbase.Module;
+
+
     /// <summary>
     /// Extensions for ModuleTypes
     /// </summary>
@@ -45,6 +48,23 @@ namespace Tahvohck_Mods
                 $"\n  UsersMax: {module.getMaxUsers()}" +
                 $"\n  O2_s1:    {module.getOxygenGeneration(1f)}" +
                 $"\n  REQUIRED: {requiredType}{(requiredType is null ? "(null)" : "")}";
+        }
+
+        public static List<Module> GetAllModules(Predicate<Module> predicate = null)
+        {
+            // Default predicate that just returns true
+            if (predicate is null) {
+                predicate = (module) => true;
+            }
+
+            // Get module list via reflection. If it's null, just get an empty List
+            var modules = typeof(Module)
+                .GetField("mModules", BindingFlags.NonPublic | BindingFlags.Static)
+                .GetValue(null) as List<Module> ?? new List<Module>();
+
+            // Filter out any null modules, then run the
+            return modules.FindAll((module) =>
+                !(module is null) && predicate.Invoke(module));
         }
     }
 
