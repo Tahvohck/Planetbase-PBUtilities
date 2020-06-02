@@ -7,7 +7,7 @@ namespace Tahvohck_Mods
 {
     /***********************
     * !! File currently not set to be compiled
-    * !! Change Build Action back to compile in order to have this get built back into 
+    * !! Change Build Action back to compile in order to have this get built back into
     ***********************/
 
     public class TahvUtil

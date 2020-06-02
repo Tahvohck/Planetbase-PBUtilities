@@ -13,7 +13,7 @@ namespace Tahvohck_Mods
     public static class ModuleHelper
     {
         /// <summary>
-        /// Set the required module to build to a new 
+        /// Set the required module to build to a new
         /// </summary>
         /// <param name="module"></param>
         public static void ResetRequiredStructure(this ModuleType module)
