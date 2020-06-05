@@ -6,6 +6,6 @@
     "Author":       "Tahvohck",
     "Version":      "<#= this.version #>.<#= this.buildID #>",
 
-    "EntryPoint":   "Tahvohck_Mods.UtilStub.Init",
+    "EntryMethod":   "Tahvohck_Mods.UtilStub.Init",
     "DisplayName":  "Utility Methods for Modders"
 }
