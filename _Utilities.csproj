@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentHelper.cs" />
+    <Compile Include="GameStateHelper.cs" />
     <Compile Include="ModuleHelper.cs" />
     <Compile Include="PlanetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
