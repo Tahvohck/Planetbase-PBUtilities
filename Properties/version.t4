@@ -1,7 +1,7 @@
 ﻿<#+
 	Version version = new Version(
 		major: 0,
-		minor: 2,
+		minor: 3,
 		build: 0
 	);
 
