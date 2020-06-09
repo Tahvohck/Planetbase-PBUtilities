@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraManagerHelper.cs" />
     <Compile Include="ComponentHelper.cs" />
     <Compile Include="GameStateHelper.cs" />
     <Compile Include="ModuleHelper.cs" />
@@ -58,6 +59,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="TahvUtil.cs" />
     <Compile Include="UtilStub.cs" />
     <None Include="Properties\Info.json">
       <DependentUpon>Info.tt</DependentUpon>
@@ -65,7 +67,7 @@
       <DesignTime>True</DesignTime>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TahvUtil.cs" />
+    <None Include="TahvUtilImported.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyVersions.tt">
