@@ -10,7 +10,7 @@ namespace Tahvohck_Mods
     /// </summary>
     public class UtilStub
     {
-        [EntryMethod]
+        [LoaderOptimization(LoaderOptimization.NotSpecified)]
         public static void Init() { return; }
     }
 }
