@@ -6,6 +6,6 @@
     "Author":       "Tahvohck",
     "Version":      "<#= this.version #>.<#= this.buildID #>",
 
-    "EntryMethod":   "Tahvohck_Mods.UtilStub.Init",
+    "EntryMethod":   "FALSE-STUB",
     "DisplayName":  "Utility Methods for Modders"
 }

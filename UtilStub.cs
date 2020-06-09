@@ -10,6 +10,7 @@ namespace Tahvohck_Mods
     /// </summary>
     public class UtilStub
     {
+        [EntryMethod]
         public static void Init() { return; }
     }
 }
