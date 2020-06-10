@@ -6,6 +6,7 @@
     "Author":       "Tahvohck",
     "Version":      "<#= this.version #>.<#= this.buildID #>",
 
-    "EntryMethod":   "FALSE-STUB",
-    "DisplayName":  "Utility Methods for Modders"
+    "EntryMethod":  "FALSE-STUB",
+    "DisplayName":  "Utility Methods for Modders",
+    "AssemblyName": ""
 }
