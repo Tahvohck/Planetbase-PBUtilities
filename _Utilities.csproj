@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CameraManagerHelper.cs" />
     <Compile Include="ComponentHelper.cs" />
+    <Compile Include="DebugRenderer.cs" />
     <Compile Include="GameStateHelper.cs" />
     <Compile Include="ModuleHelper.cs" />
     <Compile Include="PlanetHelper.cs" />
