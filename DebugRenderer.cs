@@ -64,7 +64,7 @@ namespace Tahvohck_Mods
             lineR.SetPosition(0, start);
             lineR.SetPosition(1, end);
             lineR.SetWidth(size, size);
-            lineR.GetComponent<Renderer>().material = ResourceList.getInstance().Materials.PlainColor;
+            lineR.material = ResourceList.getInstance().Materials.PlainColor;
             lineR.SetColors(color, color);
 
             lineR.transform.parent = groupObject.transform;
