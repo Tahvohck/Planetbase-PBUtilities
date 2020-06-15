@@ -50,6 +50,11 @@ namespace Tahvohck_Mods
                 $"\n  REQUIRED: {requiredType}{(requiredType is null ? "(null)" : "")}";
         }
 
+        /// <summary>
+        /// Get all non-null modules, with an optional filter predicate.
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public static List<Module> GetAllModules(Predicate<Module> predicate = null)
         {
             // Default predicate that just returns true
@@ -62,7 +67,7 @@ namespace Tahvohck_Mods
                 .GetField("mModules", BindingFlags.NonPublic | BindingFlags.Static)
                 .GetValue(null) as List<Module> ?? new List<Module>();
 
-            // Filter out any null modules, then run the
+            // Filter out any null modules, then run the predicate.
             return modules.FindAll((module) =>
                 !(module is null) && predicate.Invoke(module));
         }
