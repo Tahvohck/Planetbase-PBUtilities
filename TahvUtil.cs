@@ -4,6 +4,57 @@ using UnityModManagerNet;
 namespace Tahvohck_Mods
 {
     using ModData = UnityModManager.ModEntry;
+
+
+    /// <summary>
+    /// A vareity of mod-level utilities.
+    /// </summary>
+    public class TahvohckUtil
+    {
+        internal static BufferedLogger Logger;
+
+        [LoaderOptimization(LoaderOptimization.NotSpecified)]
+        public static void Init(ModData data) {
+            Logger = new BufferedLogger(data);
+            data.OnFixedUpdate = FirstFixedUpdate;
+        }
+
+        private static void FirstFixedUpdate(ModData data, float tDelta)
+        {
+            try {
+                Logger.Write("Running all single-fire events.");
+                OnFirstUpdate();
+            } catch (Exception e) {
+                Logger.Buffer("Complete failure loading OnFirstUpdate.");
+                Logger.Buffer(e.Message);
+                Logger.Buffer(e.StackTrace);
+                Logger.Flush();
+            }
+
+            // Swap off of this method.
+            data.OnFixedUpdate = SubsequentFixedUpdates;
+        }
+
+        /// <summary>
+        /// Subscribe to this to run a method only once, at the earliest possible point.
+        /// </summary>
+        public static event Action FirstUpdate;
+        private static void OnFirstUpdate()
+        {
+            if (FirstUpdate is null) {
+                Logger.Write("No events subscribed.");
+                return;
+            }
+            foreach (Delegate del in FirstUpdate?.GetInvocationList()) {
+                del.DynamicInvoke();
+            }
+            Logger.Flush();
+        }
+
+        private static void SubsequentFixedUpdates(ModData data, float tDelta) { return; }
+    }
+
+
     public class BufferedLogger
     {
         private ModData.ModLogger _Logger;
