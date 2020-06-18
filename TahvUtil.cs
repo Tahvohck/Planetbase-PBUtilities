@@ -1,51 +1,91 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityModManagerNet;
 
 namespace Tahvohck_Mods
 {
-    /***********************
-    * !! File currently not set to be compiled
-    * !! Change Build Action back to compile in order to have this get built back into
-    ***********************/
+    using ModData = UnityModManager.ModEntry;
 
-    public class TahvUtil
+
+    /// <summary>
+    /// A vareity of mod-level utilities.
+    /// </summary>
+    public class TahvohckUtil
     {
-        /// <summary>
-        /// Logfile gathered from Planetbase's utils since it's there.
-        /// </summary>
-        public readonly static string Logfile = Util.getFilesFolder() + "/Modhooker.log";
+        internal static BufferedLogger Logger;
 
-        /// <summary>
-        /// Log to both the unity debug log and modhooker.log.
-        /// </summary>
-        /// <param name="message">Object to log to file. Will be converted to a string via ToString</param>
-        /// <param name="context">Unity Context. Largely unneeded, but might be useful if you're using
-        /// a debugger.</param>
-        public static void Log(object message, UnityEngine.Object context = null)
+        [LoaderOptimization(LoaderOptimization.NotSpecified)]
+        public static void Init(ModData data) {
+            Logger = new BufferedLogger(data);
+            data.OnFixedUpdate = FirstFixedUpdate;
+        }
+
+        private static void FirstFixedUpdate(ModData data, float tDelta)
         {
-            string logMessage;
-            MethodBase method = new StackFrame(1).GetMethod();
-            logMessage = $"[{method.DeclaringType.FullName}] {message}";
-
-            // Log to Logfile, if errors are encountered then modify the logMessage.
             try {
-                File.AppendAllText(Logfile, logMessage + Environment.NewLine, Encoding.ASCII);
-            } catch (Exception ex) {
-                logMessage = $"{logMessage}" +
-                    $"\n  Error logging this message to the modhooker log: {Logfile}" +
-                    $"\n  {ex.Message}";
+                Logger.Write("Running all single-fire events.");
+                OnFirstUpdate();
+            } catch (Exception e) {
+                Logger.Buffer("Complete failure loading OnFirstUpdate.");
+                Logger.Buffer(e.Message);
+                Logger.Buffer(e.StackTrace);
+                Logger.Flush();
             }
-            UnityEngine.Debug.Log(logMessage, context);
+
+            // Swap off of this method.
+            data.OnFixedUpdate = SubsequentFixedUpdates;
         }
 
         /// <summary>
-        /// Only meant to be used internally to clear the log before use.
+        /// Subscribe to this to run a method only once, at the earliest possible point.
         /// </summary>
-        internal static void ClearLog()
+        public static event Action FirstUpdate;
+        private static void OnFirstUpdate()
         {
-            File.WriteAllText(Logfile, string.Empty);
+            if (FirstUpdate is null) {
+                Logger.Write("No events subscribed.");
+                return;
+            }
+            foreach (Delegate del in FirstUpdate?.GetInvocationList()) {
+                del.DynamicInvoke();
+            }
+            Logger.Flush();
+        }
+
+        private static void SubsequentFixedUpdates(ModData data, float tDelta) { return; }
+    }
+
+
+    public class BufferedLogger
+    {
+        private ModData.ModLogger _Logger;
+        private string _Buffer = "";
+
+        public BufferedLogger(ModData e)
+        {
+            _Logger = e.Logger;
+        }
+
+        public void Buffer(object input)
+        {
+            if (_Logger is null) return;
+            if (_Buffer is "") {
+                _Buffer = $"{input}";
+            } else {
+                _Buffer += $"\n{input}";
+            }
+        }
+
+        public void Flush()
+        {
+            if (_Buffer is "" || _Logger is null) return;
+            _Logger.Log(_Buffer);
+            _Buffer = "";
+        }
+
+        public void Write(object input)
+        {
+            Buffer(input);
+            Flush();
         }
     }
 }
